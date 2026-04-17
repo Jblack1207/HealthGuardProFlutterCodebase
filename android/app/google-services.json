@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "299803747384",
+    "project_id": "fypproject-53e06",
+    "storage_bucket": "fypproject-53e06.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299803747384:android:61864366e64e00acadb2cd",
+        "android_client_info": {
+          "package_name": "com.example.iot_app_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo6LuMe84SFVOy6SpOfbnmJZ39_ZQSnGw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
