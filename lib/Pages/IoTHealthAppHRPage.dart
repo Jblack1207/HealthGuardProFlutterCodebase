@@ -78,16 +78,23 @@ class _IothealthapphrpageState extends State<Iothealthapphrpage> {
       });
     }
   }
-  void _openDevice(Map<String, dynamic> device) {
+  Future<void> _openDevice(Map<String, dynamic> device) async {
     final deviceId = device['device_id']?.toString() ?? '';
     if (deviceId.isEmpty) return;
 
-    Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => DeviceReadingsView(deviceId: deviceId),
+        builder: (_) => DeviceReadingsView(
+          deviceId: deviceId,
+          deviceName: device['name']?.toString(),
+        ),
       ),
     );
+
+    if (!mounted) return;
+    await _loadMyDevices();
+
   }
 
   Widget _buildDeviceCard(Map<String, dynamic> device) {

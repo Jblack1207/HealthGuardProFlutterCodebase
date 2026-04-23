@@ -42,5 +42,23 @@ class DeviceApiService {
     return jsonDecode(response.body) as List<dynamic>;
   }
 
+  Future<Map<String, dynamic>> updateDeviceName({
+    required String deviceId,
+    required String name,
+  }) async {
+    final response = await _base.authorizedPatch(
+      '/devices/$deviceId/name',
+      body: {
+        'name': name,
+      },
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed: ${response.statusCode} ${response.body}');
+    }
+
+    return jsonDecode(response.body) as Map<String, dynamic>;
+  }
+
 
 }

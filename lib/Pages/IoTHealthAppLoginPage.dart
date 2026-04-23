@@ -57,8 +57,8 @@ class _IoTHealthAppLoginScreenState
     Color? borderColor,
   }) {
     return SizedBox(
-      width: 70,
-      height: 60,
+      width: 65,
+      height: 55,
       child: ElevatedButton(
         onPressed: onPressed ?? () {},
         style: ElevatedButton.styleFrom(
@@ -108,7 +108,7 @@ class _IoTHealthAppLoginScreenState
                 // Logo image for Login Page
                 child: Image.asset(
                   'assets/images/HGLogoLM.png',
-                  width: 190,
+                  width: 180,
                   fit: BoxFit.contain,
                 ),
               ),
@@ -127,8 +127,8 @@ class _IoTHealthAppLoginScreenState
                 decoration: const BoxDecoration(
                   color: Color(0xff27272A),
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(45),
-                    topRight: Radius.circular(45),
+                    topLeft: Radius.circular(60),
+                    topRight: Radius.circular(60),
                   ),
 
                   boxShadow: [
@@ -146,7 +146,7 @@ class _IoTHealthAppLoginScreenState
                 child: SingleChildScrollView(
                   keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                   //controls width and height of objects within the lifted tab (i.e Log In, Email)
-                  padding: EdgeInsets.fromLTRB(40, 22, 40, MediaQuery.of(context).viewInsets.bottom+24),
+                  padding: EdgeInsets.fromLTRB(60, 22, 60, MediaQuery.of(context).viewInsets.bottom+24),
 
                   child: Align(
                     alignment: Alignment.topCenter,
@@ -156,7 +156,7 @@ class _IoTHealthAppLoginScreenState
                         const Text(
                           'Welcome',
                           style: TextStyle(
-                            fontSize: 28,
+                            fontSize: 24,
                             fontWeight: FontWeight.w800,
                             color: Colors.white,
                             fontStyle: FontStyle.italic,
@@ -172,7 +172,7 @@ class _IoTHealthAppLoginScreenState
 
                           onChanged: (_) => setState(() {_emailError = false;}),
 
-                          style: const TextStyle(color: Colors.white, height: 1.2),
+                          style: const TextStyle(color: Colors.white, height: 1, fontSize: 14),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             prefixIcon: const Icon(
@@ -180,18 +180,18 @@ class _IoTHealthAppLoginScreenState
                               color: Colors.white,
                             ),
                             hintText: 'Email',
-                            hintStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                            hintStyle: const TextStyle(color: Colors.white, fontSize: 14),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(40),
                               borderSide: BorderSide(
                                   color: _emailError ? Colors.red : Colors.white,
-                                  width: 1),
+                                  width: 0.5),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(40),
                               borderSide: BorderSide(
                                 color: _emailError ? Colors.red : Colors.white,
-                                width: 2,
+                                width: 0.8,
                               ),
                             ),
                           ),
@@ -207,7 +207,7 @@ class _IoTHealthAppLoginScreenState
                           onChanged: (_) => setState(() {_passwordError = false;}),
                           keyboardType: TextInputType.text,
 
-                          style: const TextStyle(color: Colors.white, height: 1.2),
+                          style: const TextStyle(color: Colors.white, height: 1, fontSize: 14),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             prefixIcon: const Icon(
@@ -228,30 +228,30 @@ class _IoTHealthAppLoginScreenState
                               },
                             ),
                             hintText: 'Password',
-                            hintStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                            hintStyle: const TextStyle(color: Colors.white, fontSize: 14),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: _passwordError ? Colors.red : Colors.white, width: 1),
+                              borderRadius: BorderRadius.circular(40),
+                              borderSide: BorderSide(color: _passwordError ? Colors.red : Colors.white, width: 0.5),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(40),
                               borderSide: BorderSide(
                                 color: _passwordError ? Colors.red : Colors.white,
-                                width: 2,
+                                width: 0.8,
                               ),
                             ),
                           ),
                         ),
 
                         //Login Button design
-                        const SizedBox(height: 22),
+                        const SizedBox(height: 24),
 
                         ClipRRect(
                           borderRadius: BorderRadius.circular(30),
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                             child: SizedBox(
-                              width: 200,
+                              width: 180,
                               height: 45,
                               child: ElevatedButton(
                                 onPressed: _isLoginEnabled
@@ -333,7 +333,7 @@ class _IoTHealthAppLoginScreenState
                                 child: const Text(
                                   'Log In',
                                   style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     fontStyle: FontStyle.italic,
                                     color: Colors.black
@@ -345,7 +345,7 @@ class _IoTHealthAppLoginScreenState
                         ),
 
                         //forgot password text and handling
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 12),
 
                         Align(
                           alignment: Alignment.center,
@@ -363,7 +363,7 @@ class _IoTHealthAppLoginScreenState
                               'Forgot password?',
                               style: TextStyle(
                                 color: Color(0xffB3B3B5),
-                                fontSize: 14,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 decoration: TextDecoration.underline,
                                   decorationColor: Colors.white,
@@ -410,7 +410,7 @@ class _IoTHealthAppLoginScreenState
                         ),
 
                         //sign up text
-                        const SizedBox(height: 14),
+                        const SizedBox(height: 16),
 
                         Align(
                           alignment: Alignment.center,
@@ -418,7 +418,7 @@ class _IoTHealthAppLoginScreenState
                               "Don't have an Account?",
                               style: TextStyle(
                                 color: Color(0xffB3B3B5),
-                                fontSize: 14,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -448,7 +448,7 @@ class _IoTHealthAppLoginScreenState
                               'Sign Up',
                               style: TextStyle(
                                 color: Color(0xffB3B3B5),
-                                fontSize: 14,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 decoration: TextDecoration.underline,
                                 decorationColor: Colors.white,

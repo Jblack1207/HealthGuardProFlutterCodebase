@@ -3,10 +3,14 @@ import '../Helpers/DevicesAPIService.dart';
 
 class DeviceReadingsView extends StatefulWidget {
   final String deviceId;
+  final String? deviceName;
+
+
 
   const DeviceReadingsView({
     super.key,
     required this.deviceId,
+    this.deviceName,
   });
 
   @override
@@ -18,10 +22,22 @@ class _DeviceReadingsViewState extends State<DeviceReadingsView> {
   bool _isLoading = false;
   String? _error;
 
+  late String _deviceName;
+  bool _isEditingName = false;
+  late TextEditingController _deviceNameController;
+
   @override
   void initState() {
     super.initState();
+    _deviceName = widget.deviceName ?? 'Device ${widget.deviceId}';
+    _deviceNameController = TextEditingController(text: _deviceName);
     _loadDeviceReadings();
+  }
+
+  @override
+  void dispose() {
+    _deviceNameController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadDeviceReadings() async {
@@ -47,6 +63,53 @@ class _DeviceReadingsViewState extends State<DeviceReadingsView> {
       });
     }
   }
+
+  void _startEditingName() {
+    setState(() {
+      _deviceNameController.text = _deviceName;
+      _isEditingName = true;
+    });
+  }
+
+  void _cancelEditingName() {
+    setState(() {
+      _deviceNameController.text = _deviceName;
+      _isEditingName = false;
+    });
+  }
+
+  Future<void> _saveDeviceName() async {
+    final newName = _deviceNameController.text.trim();
+
+    if (newName.isEmpty || newName == _deviceName) {
+      setState(() {
+        _isEditingName = false;
+      });
+      return;
+    }
+
+    try {
+      await DeviceApiService().updateDeviceName(
+        deviceId: widget.deviceId,
+        name: newName,
+      );
+
+      if (!mounted) return;
+
+      setState(() {
+        _deviceName = newName;
+        _isEditingName = false;
+      });
+    } catch (e) {
+      if (!mounted) return;
+
+      setState(() {
+        _error = 'Failed to update device name: $e';
+      });
+    }
+  }
+
+
 
   Widget _infoRow(String label, String value) {
     return Padding(
@@ -172,7 +235,38 @@ class _DeviceReadingsViewState extends State<DeviceReadingsView> {
       backgroundColor: const Color(0xff1F1F1F),
       appBar: AppBar(
         backgroundColor: const Color(0xff1F1F1F),
-        title: Text('Device ${widget.deviceId}'),
+        title: _isEditingName
+            ? TextField(
+          controller: _deviceNameController,
+          autofocus: true,
+          style: const TextStyle(color: Colors.white),
+          cursorColor: Colors.white,
+          decoration: const InputDecoration(
+            border: InputBorder.none,
+            hintText: 'Device name',
+            hintStyle: TextStyle(color: Colors.white54),
+          ),
+        )
+            : Text(
+          _deviceName,
+          overflow: TextOverflow.ellipsis,
+        ),
+        actions: [
+          if (_isEditingName) ...[
+            IconButton(
+              onPressed: _cancelEditingName,
+              icon: const Icon(Icons.close, color: Colors.white70),
+            ),
+            IconButton(
+              onPressed: _saveDeviceName,
+              icon: const Icon(Icons.check, color: Colors.white70),
+            ),
+          ] else
+            IconButton(
+              onPressed: _startEditingName,
+              icon: const Icon(Icons.edit, color: Colors.white70),
+            ),
+        ],
       ),
       body: _buildReadingsContent(),
     );

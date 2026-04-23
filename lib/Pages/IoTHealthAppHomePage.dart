@@ -106,7 +106,7 @@ class _IoTHealthAppHomePageState
                     Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                           IconButton(
+                          IconButton(
                             onPressed: () async {
                               await AuthService().signOut();
                               final user = FirebaseAuth.instance.currentUser;
@@ -173,14 +173,8 @@ class _IoTHealthAppHomePageState
 
                     LatestMonitoringSection(
                       devices: _Mondevices,
-                      getLatestReading: (deviceId) async {
-                        final readings = await DeviceApiService().getHRDeviceReadings(deviceId);
-
-                        if (readings.isEmpty) {
-                          return null;
-                        }
-
-                        return readings.first as Map<String, dynamic>;
+                      getReadings: (deviceId) async {
+                        return DeviceApiService().getHRDeviceReadings(deviceId);
                       },
                     ),
 

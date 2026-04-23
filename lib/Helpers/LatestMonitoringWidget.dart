@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'HRMonitoringChartWidget.dart';
+
 class LatestMonitoringSection extends StatefulWidget {
   final List<dynamic> devices;
-  final Future<Map<String, dynamic>?> Function(String deviceId) getLatestReading;
+  final Future<List<dynamic>> Function(String deviceId) getReadings;
 
   const LatestMonitoringSection({
     super.key,
     required this.devices,
-    required this.getLatestReading,
+    required this.getReadings,
+
   });
 
   @override
@@ -19,6 +22,7 @@ class _LatestMonitoringSectionState extends State<LatestMonitoringSection> {
   Map<String, dynamic>? _latestReading;
   bool _isLoading = false;
   String? _error;
+  List<dynamic> _readings = [];
 
   List<Map<String, dynamic>> get _monitoringDevices {
     return widget.devices
@@ -32,7 +36,7 @@ class _LatestMonitoringSectionState extends State<LatestMonitoringSection> {
   }
 
 
-  Future<void> _loadLatestReading() async {
+  Future<void> _loadReadings() async {
     final device = _selectedDevice;
     if (device == null) return;
 
@@ -43,21 +47,25 @@ class _LatestMonitoringSectionState extends State<LatestMonitoringSection> {
       _isLoading = true;
       _error = null;
       _latestReading = null;
+      _readings = [];
     });
 
     try {
-      final reading = await widget.getLatestReading(deviceId);
+      final readings = await widget.getReadings(deviceId);
 
       if (!mounted) return;
 
       setState(() {
-        _latestReading = reading;
+        _readings = readings;
+        _latestReading = readings.isEmpty
+            ? null
+            : readings.first as Map<String, dynamic>;
       });
     } catch (e) {
       if (!mounted) return;
 
       setState(() {
-        _error = 'Failed to load latest reading: $e';
+        _error = 'Failed to load readings: $e';
       });
     } finally {
       if (!mounted) return;
@@ -74,7 +82,7 @@ class _LatestMonitoringSectionState extends State<LatestMonitoringSection> {
 
     if (_selectedDevice == null && _monitoringDevices.isNotEmpty) {
       _selectedDevice = _monitoringDevices.first;
-      _loadLatestReading();
+      _loadReadings();
     }
   }
 
@@ -154,7 +162,7 @@ class _LatestMonitoringSectionState extends State<LatestMonitoringSection> {
 
     if (_monitoringDevices.isNotEmpty) {
       _selectedDevice = _monitoringDevices.first;
-      _loadLatestReading();
+      _loadReadings();
     }
   }
 
@@ -233,12 +241,14 @@ class _LatestMonitoringSectionState extends State<LatestMonitoringSection> {
                   );
                 });
 
-                _loadLatestReading();
+                _loadReadings();
               },
             ),
           ),
           const SizedBox(height: 18),
           _buildContent(),
+          const SizedBox(height: 18),
+          HRLineChart(readings: _readings),
         ],
       ),
     );

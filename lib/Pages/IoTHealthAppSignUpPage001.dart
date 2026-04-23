@@ -94,8 +94,8 @@ class _IoTHealthAppSignUpPage001State
                 decoration: const BoxDecoration(
                   color: Color(0xff27272A),
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(45),
-                    topRight: Radius.circular(45),
+                    topLeft: Radius.circular(60),
+                    topRight: Radius.circular(60),
                   ),
 
                   boxShadow: [
@@ -113,7 +113,7 @@ class _IoTHealthAppSignUpPage001State
                 child: SingleChildScrollView(
                   keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                   //controls width and height of objects within the lifted tab (i.e Log In, Email)
-                  padding: EdgeInsets.fromLTRB(40, 22, 40, MediaQuery.of(context).viewInsets.bottom+24),
+                  padding: EdgeInsets.fromLTRB(60, 22, 60, MediaQuery.of(context).viewInsets.bottom+24),
 
                   child: Align(
                     alignment: Alignment.topCenter,
@@ -123,7 +123,7 @@ class _IoTHealthAppSignUpPage001State
                         const Text(
                           'Register',
                           style: TextStyle(
-                            fontSize: 28,
+                            fontSize: 24,
                             fontWeight: FontWeight.w800,
                             color: Colors.white,
                             fontStyle: FontStyle.italic,
@@ -137,7 +137,7 @@ class _IoTHealthAppSignUpPage001State
                               child: TextField(
                                 controller: _firstNameController,
                                 onChanged: (_) => setState(() {}),
-                                style: const TextStyle(color: Colors.white, height: 1.2),
+                                style: const TextStyle(color: Colors.white, height: 1.2, fontSize: 14),
                                 cursorColor: Colors.white,
                                 decoration: InputDecoration(
                                   prefixIcon: const Icon(
@@ -145,16 +145,16 @@ class _IoTHealthAppSignUpPage001State
                                   color: Colors.white,
                                 ),
                                 hintText: 'First Name',
-                                hintStyle: const TextStyle(color: Colors.white60, fontWeight: FontWeight.w500),
+                                hintStyle: const TextStyle(color: Colors.white60, fontSize: 14),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
-                                  borderSide: const BorderSide(color: Colors.white, width: 1),
+                                  borderSide: const BorderSide(color: Colors.white, width: 0.5),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide: const BorderSide(
                                     color: Colors.white,
-                                    width: 2,
+                                    width: 0.8,
                                     ),
                                   ),
                                 ),
@@ -168,7 +168,7 @@ class _IoTHealthAppSignUpPage001State
                               child: TextField(
                                 controller: _lastNameController,
                                 onChanged: (_) => setState(() {}),
-                                style: const TextStyle(color: Colors.white, height: 1.2),
+                                style: const TextStyle(color: Colors.white, height: 1.2, fontSize: 14),
                                 cursorColor: Colors.white,
                                 decoration: InputDecoration(
                                   prefixIcon: const Icon(
@@ -176,16 +176,16 @@ class _IoTHealthAppSignUpPage001State
                                     color: Colors.white,
                                   ),
                                   hintText: 'Last Name',
-                                  hintStyle: const TextStyle(color: Colors.white60, fontWeight: FontWeight.w500),
+                                  hintStyle: const TextStyle(color: Colors.white60, fontSize: 14),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
-                                    borderSide: const BorderSide(color: Colors.white, width: 1),
+                                    borderSide: const BorderSide(color: Colors.white, width: 0.5),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: const BorderSide(
                                       color: Colors.white,
-                                      width: 2,
+                                      width: 0.8,
                                     ),
                                   ),
                                 ),
@@ -199,7 +199,7 @@ class _IoTHealthAppSignUpPage001State
                           child: TextField(
                             controller: _addressLine01Controller,
                             onChanged: (_) => setState(() {}),
-                            style: const TextStyle(color: Colors.white, height: 1.2),
+                            style: const TextStyle(color: Colors.white, height: 1.2, fontSize: 14),
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
@@ -207,16 +207,16 @@ class _IoTHealthAppSignUpPage001State
                                 color: Colors.white,
                               ),
                               hintText: 'First Line of Address',
-                              hintStyle: const TextStyle(color: Colors.white60, fontWeight: FontWeight.w500),
+                              hintStyle: const TextStyle(color: Colors.white60, fontSize: 14),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: const BorderSide(color: Colors.white, width: 1),
+                                borderSide: const BorderSide(color: Colors.white, width: 0.5),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
                                 borderSide: const BorderSide(
                                   color: Colors.white,
-                                  width: 2,
+                                  width: 0.8,
                                 ),
                               ),
                             ),
@@ -230,7 +230,7 @@ class _IoTHealthAppSignUpPage001State
                           child: TextField(
                             controller: _addressLine02Controller,
                             onChanged: (_) => setState(() {}),
-                            style: const TextStyle(color: Colors.white, height: 1.2),
+                            style: const TextStyle(color: Colors.white, height: 1.2, fontSize: 14),
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
@@ -238,16 +238,16 @@ class _IoTHealthAppSignUpPage001State
                                 color: Colors.white,
                               ),
                               hintText: 'Second Line of Address',
-                              hintStyle: const TextStyle(color: Colors.white60, fontWeight: FontWeight.w500),
+                              hintStyle: const TextStyle(color: Colors.white60, fontSize: 14),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: const BorderSide(color: Colors.white, width: 1),
+                                borderSide: const BorderSide(color: Colors.white, width: 0.5),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
                                 borderSide: const BorderSide(
                                   color: Colors.white,
-                                  width: 2,
+                                  width: 0.8,
                                 ),
                               ),
                             ),
@@ -260,12 +260,11 @@ class _IoTHealthAppSignUpPage001State
 
                         Row(
                           children: [
-                            const SizedBox(width: 10),
                             Expanded(
                               child: TextField(
                                 controller: _postCodeController,
                                 onChanged: (_) => setState(() {}),
-                                style: const TextStyle(color: Colors.white, height: 1.2),
+                                style: const TextStyle(color: Colors.white, height: 1.2, fontSize: 14),
                                 cursorColor: Colors.white,
                                 decoration: InputDecoration(
                                   prefixIcon: const Icon(
@@ -273,16 +272,16 @@ class _IoTHealthAppSignUpPage001State
                                     color: Colors.white,
                                   ),
                                   hintText: 'Postcode',
-                                  hintStyle: const TextStyle(color: Colors.white60, fontWeight: FontWeight.w500),
+                                  hintStyle: const TextStyle(color: Colors.white60, fontSize: 14),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
-                                    borderSide: const BorderSide(color: Colors.white, width: 1),
+                                    borderSide: const BorderSide(color: Colors.white, width: 0.5),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: const BorderSide(
                                       color: Colors.white,
-                                      width: 2,
+                                      width: .8,
                                     ),
                                   ),
                                 ),
@@ -296,7 +295,7 @@ class _IoTHealthAppSignUpPage001State
                               child: TextField(
                                 controller: _countyController,
                                 onChanged: (_) => setState(() {}),
-                                style: const TextStyle(color: Colors.white, height: 1.2),
+                                style: const TextStyle(color: Colors.white, height: 1.2, fontSize: 14),
                                 cursorColor: Colors.white,
                                 decoration: InputDecoration(
                                   prefixIcon: const Icon(
@@ -304,35 +303,34 @@ class _IoTHealthAppSignUpPage001State
                                     color: Colors.white,
                                   ),
                                   hintText: 'County',
-                                  hintStyle: const TextStyle(color: Colors.white60, fontWeight: FontWeight.w500),
+                                  hintStyle: const TextStyle(color: Colors.white60, fontSize: 14),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
-                                    borderSide: const BorderSide(color: Colors.white, width: 1),
+                                    borderSide: const BorderSide(color: Colors.white, width: .5),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: const BorderSide(
                                       color: Colors.white,
-                                      width: 2,
+                                      width: .8,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 10),
                           ],
                         ),
 
 
                         //Login Button design
-                        const SizedBox(height: 22),
+                        const SizedBox(height: 24),
 
                         ClipRRect(
                           borderRadius: BorderRadius.circular(30),
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                             child: SizedBox(
-                              width: 200,
+                              width: 180,
                               height: 45,
                               child: ElevatedButton(
                                 onPressed: isEnabled ? (){
@@ -373,7 +371,7 @@ class _IoTHealthAppSignUpPage001State
                                 child: const Text(
                                   'Continue',
                                   style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                       fontStyle: FontStyle.italic
                                   ),
@@ -389,10 +387,10 @@ class _IoTHealthAppSignUpPage001State
                         Align(
                           alignment: Alignment.center,
                           child: const Text(
-                            "Already have an account?",
+                            "Already have an Account?",
                             style: TextStyle(
                               color: Color(0xffB3B3B5),
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -421,7 +419,7 @@ class _IoTHealthAppSignUpPage001State
                               'Log In',
                               style: TextStyle(
                                   color: Color(0xffB3B3B5),
-                                  fontSize: 14,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                   decoration: TextDecoration.underline,
                                   decorationColor: Colors.white,
