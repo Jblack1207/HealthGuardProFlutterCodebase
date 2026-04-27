@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -42,11 +44,29 @@ class _IoTHealthAppCamPageViewerState
     super.initState();
     _viewKey = DateTime.now().microsecondsSinceEpoch.toString();
     _startConnection();
+
   }
 
-  void _toggleMicMute() {
+  Future<void> _toggleMicMute() async {
+    final nextMicMuted = !_isMicMuted;
+
+    if (!nextMicMuted) {
+      await _connection?.ensureTalkbackTrack();
+    }
+
+    await _connection?.setTalkbackEnabled(!nextMicMuted);
+
+    _connection?.signalChannel.sink.add(
+      jsonEncode({
+        'type': 'talkback',
+        'enabled': !nextMicMuted,
+      }),
+    );
+
+    if (!mounted) return;
+
     setState(() {
-      _isMicMuted = !_isMicMuted;
+      _isMicMuted = nextMicMuted;
     });
   }
 
@@ -288,7 +308,6 @@ class _IoTHealthAppCamPageViewerState
                       ),
                       IconButton(
                         onPressed: _toggleMicMute,
-                        //TODO Add return audio track
                         icon: Icon(
                           _isMicMuted ? Icons.mic_off : Icons.mic,
                           color: Colors.white,

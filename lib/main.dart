@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:iot_app_project/firebase_options.dart';
+import 'Helpers/PushNotificationHelper.dart';
 import 'Pages/IoTHealthAppLoginPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,6 +13,7 @@ void main() async{
   );
   print("Firebase Connected");
   runApp(const IoTHealthApp());
+  await PushNotificationHelper.initialize();
 }
 
 class IoTHealthApp extends StatelessWidget {

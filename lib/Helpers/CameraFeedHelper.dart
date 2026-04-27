@@ -8,10 +8,56 @@ class CameraFeedConnection {
   final RTCPeerConnection peerConnection;
   final WebSocketChannel signalChannel;
 
+  // CHANGED: no longer final so we can create talkback later
+  MediaStream? localAudioStream;
+
+  // CHANGED: no longer final so we can create talkback later
+  MediaStreamTrack? talkbackTrack;
+
   CameraFeedConnection({
     required this.peerConnection,
     required this.signalChannel,
+    this.localAudioStream,
+    this.talkbackTrack,
   });
+
+  // ADDED
+  Future<void> ensureTalkbackTrack() async {
+    if (talkbackTrack != null) {
+      print('Talkback track already exists');
+      return;
+    }
+
+    print('Creating local audio stream');
+    localAudioStream = await navigator.mediaDevices.getUserMedia({
+      'audio': {
+        'echoCancellation': true,
+        'noiseSuppression': true,
+        'autoGainControl': true,
+      },
+      'video': false,
+    });
+
+    talkbackTrack = localAudioStream!.getAudioTracks().first;
+    talkbackTrack!.enabled = false;
+
+    print('Adding talkback track');
+    await peerConnection.addTrack(talkbackTrack!, localAudioStream!);
+
+    final offer = await peerConnection.createOffer();
+    await peerConnection.setLocalDescription(offer);
+
+    print('Sending renegotiation offer');
+    signalChannel.sink.add(jsonEncode({
+      'type': offer.type,
+      'sdp': offer.sdp,
+    }));
+  }
+
+  Future<void> setTalkbackEnabled(bool enabled) async {
+    talkbackTrack?.enabled = enabled;
+    print('Talkback enabled: $enabled');
+  }
 }
 
 class CameraFeedService {
@@ -161,6 +207,9 @@ class CameraFeedService {
         track.stop();
       }
     }
+
+    connection?.talkbackTrack?.stop();
+    await connection?.localAudioStream?.dispose();
 
     renderer.srcObject = null;
     connection?.signalChannel.sink.close();

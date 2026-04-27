@@ -6,11 +6,14 @@ import 'package:iot_app_project/Firebase Helpers/FirebaseAuth Helper.dart';
 import 'package:iot_app_project/Helpers/UsersAPIService.dart';
 
 
+import '../Helpers/AlertsHelper.dart';
 import '../Helpers/DeviceViewerHelper.dart';
 import '../Helpers/DevicesAPIService.dart';
 import '../Helpers/LatestMonitoringWidget.dart';
 import '../Helpers/TotalDevicesWidget.dart';
+import '../Models/AlertsModel.dart';
 import '../pages/IoTHealthAppLoginPage.dart';
+import 'IoTHealthAppNotificationsPage.dart';
 
 class IoTHealthAppHomePage extends StatefulWidget {
   const IoTHealthAppHomePage({super.key});
@@ -155,12 +158,64 @@ class _IoTHealthAppHomePageState
                               ],
                             ),
                           ),
-                          const SizedBox(width: 126),//need to fix in relation to different sized names //TODO
-                          const Icon(
-                            Icons.notifications,
-                            color: Colors.white,
-                            size: 34,
-                          ),
+                          const SizedBox(width: 119),//need to fix in relation to different sized names //TODO
+                          FutureBuilder<List<AlertModel>>(
+                            future: AlertApiHelper.fetchActiveAlerts(),
+                            builder: (context, snapshot) {
+                              final alertCount = snapshot.data?.length ?? 0;
+
+                              return Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => const IoTHealthAppNotificationsPage(),
+                                        ),
+                                      );
+                                    },
+                                    icon: const Icon(
+                                      Icons.notifications,
+                                      color: Colors.white,
+                                      size: 34,
+                                    ),
+                                  ),
+                                  if (alertCount > 0)
+                                    Positioned(
+                                      right: 6,
+                                      top: 6,
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                        decoration: BoxDecoration(
+                                          color: Colors.redAccent,
+                                          borderRadius: BorderRadius.circular(12),
+                                          border: Border.all(
+                                            color: const Color(0xff1F1F1F),
+                                            width: 1.5,
+                                          ),
+                                        ),
+                                        constraints: const BoxConstraints(
+                                          minWidth: 18,
+                                          minHeight: 18,
+                                        ),
+                                        child: Text(
+                                          alertCount > 99 ? '99+' : '$alertCount',
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              );
+                            },
+                          )
+,
                         ]
                     ),
                     const SizedBox(height: 18),
