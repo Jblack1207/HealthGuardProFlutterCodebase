@@ -171,7 +171,7 @@ class _LatestMonitoringSectionState extends State<LatestMonitoringSection> {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFF27272A),
+        color: const Color(0xaa27272A),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(color: Colors.white10),
       ),
@@ -183,7 +183,7 @@ class _LatestMonitoringSectionState extends State<LatestMonitoringSection> {
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w200,
             ),
           ),
           const SizedBox(height: 16),

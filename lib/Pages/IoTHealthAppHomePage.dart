@@ -132,7 +132,6 @@ class _IoTHealthAppHomePageState
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
-                              fontWeight: FontWeight.w500,
                             ),
                           )
                               : RichText(
@@ -145,14 +144,12 @@ class _IoTHealthAppHomePageState
                               children: [
                                 const TextSpan(
                                   text: 'Welcome, ',
-                                  style: TextStyle(color: Colors.white, fontSize: 20,
-                                      fontWeight: FontWeight.w600),
+                                  style: TextStyle(color: Colors.white, fontSize: 20),
                                 ),
                                 TextSpan(
                                   text: firstName,
                                   style: const TextStyle(
                                       color: Color(0xffffc21c),
-                                      fontWeight: FontWeight.w600
                                   ),
                                 ),
                               ],

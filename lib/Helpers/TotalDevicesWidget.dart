@@ -25,7 +25,7 @@ class DeviceTypeSummaryWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFF27272A),
+        color: const Color(0xaa27272A),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(color: Colors.white10),
       ),
@@ -37,7 +37,7 @@ class DeviceTypeSummaryWidget extends StatelessWidget {
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(height: 18),
@@ -111,7 +111,7 @@ class DeviceTypeSummaryWidget extends StatelessWidget {
             style: TextStyle(
               color: color,
               fontSize: 24,
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w200,
             ),
           ),
           const SizedBox(height: 6),
