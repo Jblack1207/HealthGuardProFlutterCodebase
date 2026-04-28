@@ -21,6 +21,9 @@ class _IothealthapphrpageState extends State<Iothealthapphrpage> {
   bool _isAddingDevice = false;
   String? _error;
 
+  String _deviceInputHint = 'Enter device ID';
+
+
   @override
   void initState() {
     super.initState();
@@ -70,6 +73,15 @@ class _IothealthapphrpageState extends State<Iothealthapphrpage> {
 
       setState(() {
         _isAddingDevice = false;
+        _deviceInputHint = 'Device added successfully';
+      });
+
+      await Future.delayed(const Duration(seconds: 5));
+
+      if (!mounted) return;
+
+      setState(() {
+        _deviceInputHint = 'Enter device ID';
       });
     } else {
       setState(() {
@@ -102,11 +114,18 @@ class _IothealthapphrpageState extends State<Iothealthapphrpage> {
     final deviceName = device['name']?.toString() ?? 'Linked Device';
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 14),
+      margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: const Color(0xff27272A),
+        color: const Color(0xaa27272A),
         borderRadius: BorderRadius.circular(22),
         border: Border.all(color: Colors.white12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.28),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
@@ -114,14 +133,15 @@ class _IothealthapphrpageState extends State<Iothealthapphrpage> {
           deviceName,
           style: const TextStyle(
             color: Colors.white,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w500,
+            fontSize: 16
           ),
         ),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 6),
           child: Text(
             'Device ID: $deviceId',
-            style: const TextStyle(color: Colors.white70),
+            style: const TextStyle(color: Colors.white70, fontSize: 13),
           ),
         ),
         trailing: const Icon(Icons.chevron_right, color: Colors.white70),
@@ -143,8 +163,15 @@ class _IothealthapphrpageState extends State<Iothealthapphrpage> {
         margin: const EdgeInsets.only(top: 20),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: const Color(0xff27272A),
+          color: const Color(0xaa27272A),
           borderRadius: BorderRadius.circular(22),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.28),
+              blurRadius: 18,
+              offset: const Offset(0, 8),
+            ),
+          ],
         ),
         child: const Text(
           'No devices linked yet. Add the device ID you were given to start monitoring.',
@@ -184,7 +211,7 @@ class _IothealthapphrpageState extends State<Iothealthapphrpage> {
               'My Heart-Rate and Fall-Monitor Devices',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 24,
+                fontSize: 22,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -194,16 +221,23 @@ class _IothealthapphrpageState extends State<Iothealthapphrpage> {
               style: TextStyle(
                 color: Colors.white70,
                 fontSize: 14,
-                height: 1.4,
+                height: 1.2,
               ),
             ),
             const SizedBox(height: 24),
             Container(
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
-                color: const Color(0xFF27272A),
+                color: const Color(0xaa27272A),
                 borderRadius: BorderRadius.circular(24),
                 border: Border.all(color: Colors.white10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.28),
+                    blurRadius: 18,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -212,17 +246,17 @@ class _IothealthapphrpageState extends State<Iothealthapphrpage> {
                     'Add Device',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   const SizedBox(height: 14),
                   TextField(
                     controller: _deviceIdController,
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white, fontSize: 12),
                     cursorColor: Colors.white,
                     decoration: InputDecoration(
-                      hintText: 'Enter device ID',
+                      hintText: _deviceInputHint,
                       hintStyle: const TextStyle(color: Colors.white54),
                       filled: true,
                       fillColor: const Color(0xff2D2D31),
@@ -236,14 +270,14 @@ class _IothealthapphrpageState extends State<Iothealthapphrpage> {
                   const SizedBox(height: 14),
                   SizedBox(
                     width: double.infinity,
-                    height: 48,
+                    height: 44,
                     child: ElevatedButton(
                       onPressed: _isAddingDevice ? null : _addDevice,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xffffc21c).withOpacity(0.95),
                         foregroundColor: Colors.black,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(24),
                         ),
                       ),
                       child: _isAddingDevice
@@ -254,7 +288,7 @@ class _IothealthapphrpageState extends State<Iothealthapphrpage> {
                       )
                           : const Text(
                         'Link Device',
-                        style: TextStyle(fontWeight: FontWeight.w700),
+                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                     ),
                   ),
@@ -277,7 +311,7 @@ class _IothealthapphrpageState extends State<Iothealthapphrpage> {
               'Linked Devices',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.w700,
               ),
             ),

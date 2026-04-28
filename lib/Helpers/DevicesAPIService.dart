@@ -60,5 +60,17 @@ class DeviceApiService {
     return jsonDecode(response.body) as Map<String, dynamic>;
   }
 
+  Future<void> removeDeviceRelationship(String deviceId) async {
+    final encodedDeviceId = Uri.encodeComponent(deviceId);
+
+    final response = await _base.authorizedDelete(
+      '/devices/$encodedDeviceId/relationship',
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed: ${response.statusCode} ${response.body}');
+    }
+  }
+
 
 }

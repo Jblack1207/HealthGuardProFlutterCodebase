@@ -197,7 +197,7 @@ class _IoTHealthAppCamPageViewerState
           'Waiting for video...',
           style: TextStyle(
             color: Colors.white70,
-            fontSize: 14,
+            fontSize: 12,
           ),
         ),
       );
@@ -257,7 +257,7 @@ class _IoTHealthAppCamPageViewerState
                             'Live Camera Feed',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 24,
+                              fontSize: 20,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -277,7 +277,7 @@ class _IoTHealthAppCamPageViewerState
                     Container(
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF27272A),
+                        color: const Color(0xaa27272A),
                         borderRadius: BorderRadius.circular(24),
                         border: Border.all(color: Colors.white10),
                       ),
@@ -291,7 +291,7 @@ class _IoTHealthAppCamPageViewerState
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF27272A),
+                    color: const Color(0xaa27272A),
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(color: Colors.white10),
                   ),

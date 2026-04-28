@@ -174,6 +174,13 @@ class _LatestMonitoringSectionState extends State<LatestMonitoringSection> {
         color: const Color(0xaa27272A),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(color: Colors.white10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.28),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

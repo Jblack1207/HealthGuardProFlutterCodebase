@@ -109,6 +109,69 @@ class _DeviceReadingsViewState extends State<DeviceReadingsView> {
     }
   }
 
+  Future<void> _deleteDeviceRelationship() async {
+    final shouldDelete = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF29292B),
+          contentPadding: const EdgeInsets.fromLTRB(24, 4, 24, 0),
+          title: const Text(
+            'Remove Device?',
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
+          content: Text(
+            'Are you sure you want to delete the Device: $_deviceName?',
+            style: const TextStyle(color: Colors.white70, fontSize: 14),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Colors.white70, fontSize: 14),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              child: const Text(
+                'Delete',
+                style: TextStyle(color: Colors.redAccent, fontSize: 14),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (shouldDelete != true) return;
+
+    setState(() {
+      _isLoading = true;
+      _error = null;
+    });
+
+    try {
+      await DeviceApiService().removeDeviceRelationship(widget.deviceId);
+
+      if (!mounted) return;
+
+      Navigator.pop(context, true);
+    } catch (e) {
+      if (!mounted) return;
+
+      setState(() {
+        _isLoading = false;
+        _error = 'Failed to remove device: $e';
+      });
+    }
+  }
+
+
 
 
   Widget _infoRow(String label, String value) {
@@ -147,6 +210,13 @@ class _DeviceReadingsViewState extends State<DeviceReadingsView> {
       decoration: BoxDecoration(
         color: const Color(0xff27272A),
         borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.28),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       child: Column(
         children: [
@@ -261,11 +331,16 @@ class _DeviceReadingsViewState extends State<DeviceReadingsView> {
               onPressed: _saveDeviceName,
               icon: const Icon(Icons.check, color: Colors.white70),
             ),
-          ] else
+          ] else ...[
             IconButton(
               onPressed: _startEditingName,
               icon: const Icon(Icons.edit, color: Colors.white70),
             ),
+            IconButton(
+              onPressed: _deleteDeviceRelationship,
+              icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
+            ),
+          ],
         ],
       ),
       body: _buildReadingsContent(),

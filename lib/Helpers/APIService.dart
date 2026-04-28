@@ -111,6 +111,38 @@ class ApiService {
     return response;
   }
 
+  Future<http.Response> authorizedDelete(
+      String path, {
+        Map<String, dynamic>? body,
+      }) async {
+    String token = await getValidToken();
+
+    http.Response response = await http.delete(
+      Uri.parse('$baseUrl$path'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+      body: body != null ? jsonEncode(body) : null,
+    );
+
+    if (response.statusCode == 401) {
+      token = await getValidToken(forceRefresh: true);
+
+      response = await http.patch(
+        Uri.parse('$baseUrl$path'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: body != null ? jsonEncode(body) : null,
+      );
+    }
+
+    return response;
+  }
+
+
 
 }
 

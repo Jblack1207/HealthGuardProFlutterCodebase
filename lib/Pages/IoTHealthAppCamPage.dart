@@ -64,9 +64,16 @@ class _IoTHealthAppCamPageState extends State<IoTHealthAppCamPage> {
     return Container(
       margin: const EdgeInsets.only(bottom: 14),
       decoration: BoxDecoration(
-        color: const Color(0xFF27272A),
+        color: const Color(0xaa27272A),
         borderRadius: BorderRadius.circular(22),
         border: Border.all(color: Colors.white12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.28),
+              blurRadius: 18,
+              offset: const Offset(0, 8),
+            ),
+          ]
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
@@ -75,13 +82,14 @@ class _IoTHealthAppCamPageState extends State<IoTHealthAppCamPage> {
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w700,
+            fontSize: 14
           ),
         ),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 6),
           child: Text(
             'Device ID: $deviceId',
-            style: const TextStyle(color: Colors.white70),
+            style: const TextStyle(color: Colors.white70, fontSize: 12),
           ),
         ),
         trailing: const Icon(Icons.videocam, color: Colors.white70),
@@ -133,7 +141,7 @@ class _IoTHealthAppCamPageState extends State<IoTHealthAppCamPage> {
             'Camera Feed',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 24,
+              fontSize: 22,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -143,7 +151,7 @@ class _IoTHealthAppCamPageState extends State<IoTHealthAppCamPage> {
             style: TextStyle(
               color: Colors.white70,
               fontSize: 14,
-              height: 1.4,
+              height: 1.2,
             ),
           ),
           const SizedBox(height: 24),

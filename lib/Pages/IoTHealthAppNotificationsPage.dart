@@ -18,6 +18,10 @@ class _IoTHealthAppNotificationsPageState
   String? _error;
   List<AlertModel> _alerts = [];
 
+
+
+
+
   @override
   void initState() {
     super.initState();
@@ -67,6 +71,10 @@ class _IoTHealthAppNotificationsPageState
   }
 
   Widget _buildBody() {
+
+    final visibleAlerts = _alerts.where((alert) => alert.status != 'Resolved').toList();
+
+
     if (_isLoading) {
       return const Center(
         child: CircularProgressIndicator(
@@ -106,9 +114,9 @@ class _IoTHealthAppNotificationsPageState
       onRefresh: _loadAlerts,
       child: ListView.builder(
         padding: const EdgeInsets.fromLTRB(18, 0, 18, 24),
-        itemCount: _alerts.length,
+    itemCount: visibleAlerts.length,
         itemBuilder: (context, index) {
-          final alert = _alerts[index];
+          final alert = visibleAlerts[index];
           final isCritical = alert.severity == 'critical';
 
           return Container(
@@ -261,9 +269,9 @@ class _IoTHealthAppNotificationsPageState
                     child: Row(
                       children: [
                         IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        },
                           icon: const Icon(
                             Icons.arrow_back_ios_new,
                             color: Colors.white,

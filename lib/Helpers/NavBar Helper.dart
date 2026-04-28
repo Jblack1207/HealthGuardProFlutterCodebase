@@ -31,7 +31,7 @@ class BcbBottomNav extends StatelessWidget {
               Positioned(
                 left: 0,
                 right: 0,
-                top: 13,
+                top: 12,
                 child: Container(
                   height: barHeight,
                   decoration: BoxDecoration(
@@ -86,8 +86,8 @@ class BcbBottomNav extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: const Color(0xFF27272A),
                       border: Border.all(
-                        color: const Color(0xFF1F1F1F),
-                        width: 1,
+                        color: const Color(0xcc1F1F1F),
+                        width: 2,
                       ),
                     ),
                     child: Padding(
@@ -124,7 +124,7 @@ class BcbBottomNav extends StatelessWidget {
           icon: Icon(
             icon,
             color: Colors.white,
-            size: 40,
+            size: 36,
           ),
         ),
       ),

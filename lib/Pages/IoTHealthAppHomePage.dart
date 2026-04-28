@@ -152,7 +152,7 @@ class _IoTHealthAppHomePageState
                                 TextSpan(
                                   text: firstName,
                                   style: const TextStyle(
-                                      color: Color(0xffffc21c),
+                                    color: Color(0xffffc21c),
                                   ),
                                 ),
                               ],
@@ -168,20 +168,28 @@ class _IoTHealthAppHomePageState
                                 clipBehavior: Clip.none,
                                 children: [
                                   IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
+                                    onPressed: () async {
+                                      final result = await Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (_) => const IoTHealthAppNotificationsPage(),
                                         ),
                                       );
+
+                                      if (result == true && mounted) {
+                                        await _loadDevices();
+                                        await _loadMonitoringDevices();
+                                        if (!mounted) return;
+                                        setState(() {});
+                                      }
                                     },
                                     icon: const Icon(
                                       Icons.notifications,
                                       color: Colors.white,
                                       size: 34,
                                     ),
-                                  ),
+                                  )
+                                  ,
                                   if (alertCount > 0)
                                     Positioned(
                                       right: 6,
@@ -195,6 +203,7 @@ class _IoTHealthAppHomePageState
                                             color: const Color(0xff1F1F1F),
                                             width: 1.5,
                                           ),
+
                                         ),
                                         constraints: const BoxConstraints(
                                           minWidth: 18,
@@ -214,8 +223,7 @@ class _IoTHealthAppHomePageState
                                 ],
                               );
                             },
-                          )
-,
+                          ),
                         ]
                     ),
                     const SizedBox(height: 18),
