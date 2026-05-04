@@ -333,7 +333,6 @@ class _IoTHealthAppCamPageViewerState
                       ),
                       IconButton(
                         onPressed: () {
-                          //TODO add fullscreen capabilities
                         },
                         icon: const Icon(
                           Icons.fullscreen,
